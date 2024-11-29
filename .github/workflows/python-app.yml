@@ -39,7 +39,7 @@ jobs:
         export SNOWFLAKE_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }}
         snow --version
         snow app run \
-          --env suffix=${{ GITHUB_REF_NAME }} \
+          --env suffix=$GITHUB_REF_NAME \
           --temporary-connection
           --warehouse SANDBOX \
           --role ACCOUNTADMIN \
