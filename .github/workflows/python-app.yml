@@ -40,9 +40,8 @@ jobs:
         snow --version
         snow app run \
           --env suffix=$GITHUB_REF_NAME \
-          --temporary-connection
+          --temporary-connection \
           --warehouse SANDBOX \
           --role ACCOUNTADMIN \
           --user ${{ secrets.SNOWFLAKE_USERNAME }} \
           --account ${{ secrets.SNOWFLAKE_ACCOUNT }}
-          
