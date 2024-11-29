@@ -5,4 +5,4 @@ channels:
 - snowflake
 dependencies:
 - streamlit=1.26.0
-- python-dotenv==1.0.1
+- python-dotenv=1.0.1
