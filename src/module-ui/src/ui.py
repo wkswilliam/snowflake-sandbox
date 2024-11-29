@@ -1,37 +1,39 @@
 
 
+import pandas as pd
 import streamlit as st
+from snowflake.snowpark.functions import call_udf, col
+from snowflake.snowpark import Session
+from snowflake.snowpark import Session
+from snowflake.snowpark.context import get_active_session
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 @st.cache_resource(show_spinner="Connecting to Snowflake...")
 def getSession():
-    from snowflake.snowpark import Session
-    from snowflake.snowpark.context import get_active_session
-    import os, configparser
-
+    
     try:
         return get_active_session()
     except:
         
         connection_params = {
-            "account": "lm57939.sa-east-1.aws",
-            "user": "wkswilliam",
-            "password": "2c79jfegz62KEMM",
-            "warehouse": "SANDBOX",
-            "role": "ACCOUNTADMIN",
+            "account": os.getenv("account"),
+            "user": os.getenv("user"),
+            "password": os.getenv("password"),
+            "warehouse": os.getenv("warehouse"),
+            "role": os.getenv("role"),
         }
+        print("\n"*5)
+        print(connection_params)
+        print("\n"*5)
         session = Session.builder.configs(connection_params).create()
         session.use_database("MY_APP_STREAMLIT_PYTHON_WKSWILLIAM")
         return session
 
 def run_streamlit():
-   # Import python packages
-   # Streamlit app testing framework requires imports to reside here
-   # Streamlit app testing documentation: https://docs.streamlit.io/library/api-reference/app-testing
-   import pandas as pd
-   import streamlit as st
-   from snowflake.snowpark.functions import call_udf, col
-   from snowflake.snowpark import Session
-
+   
    st.title('Hello Snowflake!')
 
 

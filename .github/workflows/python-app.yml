@@ -36,5 +36,8 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Snowflake deploy
       run: |
+        export SNOWFLAKE_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }}
         snow --version
-        echo $GITHUB_REF_NAME
+        snow connection test --temporary-connection \
+          --account lm57939.sa-east-1.aws \
+          --user wkswilliam
