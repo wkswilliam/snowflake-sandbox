@@ -4,7 +4,7 @@ definition_version: 2
 entities:
   pkg:
     type: application package
-    identifier: <% fn.concat_ids('my_app_streamlit_python_pkg', ctx.env.suffix) %>
+    identifier: <% fn.concat_ids('my_app_streamlit_python_pkg_', ctx.env.suffix) %>
     artifacts:
       - src: app/*
         dest: ./
@@ -18,7 +18,7 @@ entities:
     type: application
     from:
       target: pkg
-    identifier: <% fn.concat_ids('my_app_streamlit_python', ctx.env.suffix) %>
+    identifier: <% fn.concat_ids('my_app_streamlit_python_', ctx.env.suffix) %>
 
 env:
   suffix: <% fn.concat_ids('_', fn.sanitize_id(fn.get_username('unknown_user')) | lower) %>

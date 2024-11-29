@@ -5,7 +5,7 @@ name: Python application
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
   pull_request:
     branches: [ "main" ]
 
@@ -38,6 +38,11 @@ jobs:
       run: |
         export SNOWFLAKE_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }}
         snow --version
-        snow connection test --temporary-connection \
-          --account lm57939.sa-east-1.aws \
-          --user wkswilliam
+        snow app run \
+          --env suffix=${{ GITHUB_REF_NAME }} \
+          --temporary-connection
+          --warehouse SANDBOX \
+          --role ACCOUNTADMIN \
+          --user ${{ secrets.SNOWFLAKE_USERNAME }} \
+          --account ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          
