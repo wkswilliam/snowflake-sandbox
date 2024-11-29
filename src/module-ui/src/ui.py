@@ -34,7 +34,7 @@ def getSession():
 
 def run_streamlit():
    
-   st.title('Hello Snowflake!')
+   st.title('Hello Snowflake! Testing CI/CD with Streamlit and Snowflake')
 
 
    st.header('UDF Example')
